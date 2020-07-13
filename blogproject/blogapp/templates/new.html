@@ -49,22 +49,20 @@
         </div>
       </div>
     </nav>
-
     <br />
-    {% for blog in blogs.all %}
-    <div class = "container">
-      <div class="card">
-        <h2 class="card-header">{{blog.title}}</h2>
-        <div class="card-body">
-          <h5 class="card-title">{{blog.pub_date}}</h5>
-          <p class="card-text">{{blog.summary}} ...</p>
-          <a href="{% url 'detail' blog.id %}" class="btn btn-dark">more</a>
-        </div>
-      </div>
+
+    <div class="container">
+      <form action="{% url 'create' %}">
+        <h5>제목</h5>
+        <input type="text" name="title" />
+        <br /><br />
+        <h5>본문</h5>
+        <textarea cols="40" rows="10" name="body"></textarea>
+        <br /><br />
+        <input class="btn btn-primary" type="submit" value="작성" />
+      </form>
     </div>
-    <br>
-    {% endfor %}
-    
+    <br />
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
