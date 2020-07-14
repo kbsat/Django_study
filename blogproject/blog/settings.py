@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blogapp.apps.BlogappConfig'
+    'blogapp.apps.BlogappConfig',
+    'portfolio.apps.PortfolioConfig',
 ]
 
 MIDDLEWARE = [
@@ -119,3 +120,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILE_DIRS = [
+    os.path.join(BASE_DIR,'portfolio','static')
+] # static 파일들이 현재 어디에 있는지를 쓰는 곳
+
+STATIC_ROOT = os.path.join(BASE_DIR,'static')
+# static 파일들이 어디로 모일 것인지를 쓰는 곳
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')

@@ -24,8 +24,9 @@ def create(request): #입력받은내용을 데이터베이스에 넣어주는 �
 def delete(request,blog_id):
     blog = get_object_or_404(Blog,pk=blog_id)
     blog.delete()
-    
     return redirect('/')
+
+
 # redirect와 render의 차이 ?
 # 비슷하긴 하지만 redirect함수는 안에 URL을 받기 때문에 다른 URL을 입력가능 ( ex : https://google.com )
 # render함수는 세번째 인자로 딕셔너리를 담아보낼 수 있기 때문에 데이터를 처리할 때 사용
