@@ -6,7 +6,8 @@
 <h3>{{fulltext}}</h3>
 <br>
 <h2>단어 카운트 :</h2>
+<!--['안녕하세요':2,'반갑습니다':1]-->
 {% for word,countTotal in dictionary %}
-{{word}} - {{countTotal}}
+{{word}} : {{countTotal}}
 <br>
 {% endfor %}

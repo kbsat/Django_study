@@ -1,0 +1,10 @@
+<h1>Word Count</h1>
+
+<a href="{% url 'about' %}">ABOUT</a>
+<p>단어의 수를 세어주는 페이지 입니다.</p>
+
+<form action="{% url 'count' %}">
+  <textarea name="fulltext" cols="30" rows="10"> </textarea>
+  <br />
+  <input type="submit" value="단어 수 세기!" />
+</form>
