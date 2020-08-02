@@ -1,9 +1,13 @@
-{% extends 'base.html' %} {% block title%}
+{% extends 'base.html' %}
+
+{% block title%}
 <title>Home</title>
-{% endblock %} {% block contents %}
+{% endblock %}
+
+{% block contents %}
 
 <div class="container">
-  {% for blog in posts%}
+{% for blog in posts%}
   <div class="card">
     <h5 class="card-header bg-dark text-white">{{blog.title}}</h5>
     <div class="card-body">
@@ -14,30 +18,23 @@
       <a href="{% url 'detail' blog.id %}" class="btn btn-dark">More</a>
     </div>
   </div>
-  <br />
-  {%endfor%} {#First Prev#}
-  <div class="container">
-    {% if posts.has_previous%}
-      <a href="?page=1">First</a>
-      <a href="?page={{posts.previous_page_number}}">
-        <i
-          href="?page={{posts.next_page_number}}"
-          class="fas fa-arrow-alt-circle-left"
-          href=""
-        ></i>
-      </a>
-    {% endif %} {# 3 of 4 #}
-    <span>{{posts.number}}</span>
-    <span> of </span>
-    <span>{{posts.paginator.num_pages}}</span>
+<br />
+{%endfor%}
+{#First Prev#}
+<div class ="container">
+{% if posts.has_previous%}
+<a href="?page=1">First</a>
+<a href="?page={{posts.previous_page_number}}">Prev</a>
+{% endif %}
 
-    {# Next Last #} 
-    {% if posts.has_next %}
-      <a href="?page={{posts.next_page_number}}">
-        <i class="fas fa-arrow-alt-circle-right"> </i>
-      </a>
-      <a href="?page={{posts.paginator.num_pages}}">Last</a>
-    {% endif %}
-  </div>
-  {% endblock %}
+<span>{{posts.number}}</span>
+<span> of </span>
+<span>{{posts.paginator.num_pages}}</span>
+
+{% if posts.has_next %}
+<a href="?page={{posts.next_page_number}}">Next</a>
+<a href="?page={{posts.paginator.num_pages}}">Last</a>
+{% endif %}
+
 </div>
+{% endblock %}
