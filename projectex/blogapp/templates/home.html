@@ -1,87 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+{% extends 'base.html' %} {% block title%}
+<title>Home</title>
+{% endblock %} {% block contents %}
 
-    <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
-      crossorigin="anonymous"
-    />
-
-    <title>Hello, world!</title>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-item nav-link active" href="{% url 'home'%}"
-            >Home <span class="sr-only">(current)</span></a
-          >
-          <a class="nav-item nav-link" href="{% url 'post' %}">게시글 작성</a>
-          <a class="nav-item nav-link" href="#">Pricing</a>
-          <a
-            class="nav-item nav-link disabled"
-            href="#"
-            tabindex="-1"
-            aria-disabled="true"
-            >Disabled</a
-          >
-        </div>
-      </div>
-    </nav>
-    <br />
-    {% for blog in blogs.all%}
-    <div class="container">
-      <div class="card">
-        <h5 class="card-header bg-dark text-white">{{blog.title}}</h5>
-        <div class="card-body">
-          <h5 class="card-title">{{blog.pub_date}}</h5>
-          <p class="card-text">
-            {{blog.summary}}
-          </p>
-          <a href="{% url 'detail' blog.id %}" class="btn btn-dark">More</a>
-        </div>
-      </div>
+<div class="container">
+  {% for blog in posts%}
+  <div class="card">
+    <h5 class="card-header bg-dark text-white">{{blog.title}}</h5>
+    <div class="card-body">
+      <h5 class="card-title">{{blog.pub_date}}</h5>
+      <p class="card-text">
+        {{blog.summary}}
+      </p>
+      <a href="{% url 'detail' blog.id %}" class="btn btn-dark">More</a>
     </div>
-    <br />
-    {%endfor%}
+  </div>
+  <br />
+  {%endfor%} {#First Prev#}
+  <div class="container">
+    {% if posts.has_previous%}
+      <a href="?page=1">First</a>
+      <a href="?page={{posts.previous_page_number}}">
+        <i
+          href="?page={{posts.next_page_number}}"
+          class="fas fa-arrow-alt-circle-left"
+          href=""
+        ></i>
+      </a>
+    {% endif %} {# 3 of 4 #}
+    <span>{{posts.number}}</span>
+    <span> of </span>
+    <span>{{posts.paginator.num_pages}}</span>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script
-      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-      integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-      crossorigin="anonymous"
-    ></script>
-  </body>
-</html>
+    {# Next Last #} 
+    {% if posts.has_next %}
+      <a href="?page={{posts.next_page_number}}">
+        <i class="fas fa-arrow-alt-circle-right"> </i>
+      </a>
+      <a href="?page={{posts.paginator.num_pages}}">Last</a>
+    {% endif %}
+  </div>
+  {% endblock %}
+</div>
